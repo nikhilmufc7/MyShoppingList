@@ -1,41 +1,77 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
+	<head>
+
+		<title>Shopping List - A Thinkful Project</title>
+
+		<!-- Meta Tags -->
+		<meta charset="utf-8"/>
+		<meta name="description" content="Jeya Karthika's Shopping List"/>
+		<meta name="author" content="Jeya Karthika"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="favicon.ico">
+
+		<!-- Stylesheets -->
+		<link href='http://fonts.googleapis.com/css?family=Rancho' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
+       <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+
 	
-	<link rel="stylesheet" href="style.css">
-	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>  
-	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script> 
-	<script src="https://rawgit.com/nikhilmufc7/ShoppingListApp/master/app.js"></script>
-</head>
-<body>
-	<div id="container" class="shadow">
-		<header>
-			<h1>Shopping List</h1>
-		</header>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 
-		<div id="content">
+	<script type="text/javascript" src= "app.js"></script>
 
-			<ul id="instructions">
-				<li>Add a new item to the list by clicking the 'Add' button or pressing the 'Enter' key.</li>
-				<li>Drag items to sort them.</li>
-				<li>Click the checkbox to mark items as completed/ongoing.</li>
-				<li>Click 'remove' to remove items from the list.</li>
+	
+	</head>
+	<body>
+		<section class="left">
+			<header>
+				<a href="index.html" class="logo"></a>
+				<h1>Shopping list</h1>
+			</header>
+			<div class="count-container">
+				<hr>
+				<p class="count"><span id="do">0</span> DO</p>
+				<hr>
+				<p class="count"><span id="done">0</span> DONE</p>
+				<hr>
+				<p class="count"><span id="total">0</span> TOTAL</p>
+				<hr>
+			</div>
+			<footer>
+				<p>Crafted with <span class="love"> &#9829; </span> by Nikhil Singh.</p>
+			</footer>
+		</section>
+
+		<section class="right"> <!-- App Section -->
+			<form>
+				<input type="text" name="newItem" id="newItem" class="textBox" autocomplete="off" placeholder="Type here.." required/>
+			</form>
+			
+			<ul id="list">
+				<li class="listitem">
+					<span class="item">Tap to check off.</span>
+					<div class="delete"></div>
+				</li>
+				<li class="listitem checked">
+					<span class="item">I 'm checked off.</span>
+					<div class="delete"></div>
+				</li>
+				<li class="listitem">
+					<span class="item">Tap &amp; Drag me.</span>
+					<div class="delete"></div>
+				</li>
+				<li class="listitem">
+					<span class="item">Tap X &amp; I'll be gone.</span>
+					<div class="delete"></div>
+				</li>
 			</ul>
 
-			<input type="text" name="newItemTextBox" id="newItemTextBox">
-			<input type="submit" value="Add" name="AddButton" id="AddButton">
-
-			<ul id="list"></ul>
-			
-		</div><!-- end of content -->
-
-		<footer>
-			<div id="thinkful">
-				Page created as part of the <a href="http://www.thinkful.com">Thinkful</a> Front-End Web Development course.
-			</div>
-		</footer>
-	</div><!-- end of container -->
-
-</body>
+		</section>
+		
+	</body>
 </html>
