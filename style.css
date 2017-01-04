@@ -1,3 +1,4 @@
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,95 +42,285 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/*---------------------------------------------------------------------------------
+   Common Styles
+---------------------------------------------------------------------------------*/
+/*float styles*/
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	background-color: #f2f2f2;
+	overflow: hidden;
+}
+
 body {
-    background-image: url('list.jpg');
-    background-size: cover;
-    margin: auto;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    width: 940px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+}
+
+section {
+	position: absolute;
+	height: 100%;
+}
+
+.left {
+	width: 25%;
+	top: 0;
+	left: 0;
+	background-color: #282828;
+	font-weight: 400;
+	color: #fff;
+}
+
+.right {
+	width: 75%;
+	top: 0;
+	right: 0;
+	font-weight: 300;
+}
+
+/*---------------------------------------------------------------------------------
+   Info Section Styles
+---------------------------------------------------------------------------------*/
+
+.header, div.count-container, footer {
+	position: relative;
+	width: 100%;
+	margin: auto;
+	text-align: center;
 }
 
 header {
-    text-align: center;
-    padding: 40px;
+	height: 20%;
+	margin: 1em 0 0.5em;
 }
 
-#content {
-  /*text-align: center;*/
-}
-
-#container {
-    margin: 16em auto;
-    width: 600px;
-    background-color: lightblue;
-    padding-left: 2em;
-    border-radius: 25px;
-    border: 2px; solid; black;
+header .logo {
+	position: relative;
+	margin: 0 auto;
+	display: block;	
+	background: url('logoANDoptions.png') no-repeat 0 0;
+	width: 74px;
+	height: 74px;
+	text-decoration: none;
 }
 
 h1 {
-    font-size: 36px;
-    font-weight: bold;
+	position: relative;
+	top: 0.5em;
+	width: 100%;
+	font-family: 'Rancho', cursive;
+	font-size: 3em;
+	text-align: center;
 }
 
-h2 {
-    font-size: 30px;
-    text-align: center;
+.count-container {
+	height: 60%;
+	padding: 2.8em 0.2em 2.5em; 
 }
 
+.count {
+	text-align: center;
+	font-size: 1.2em;
+	color: #11a8ab;
+}
+
+#do, #done, #total {
+	color: #e64c65;
+	font-size: 4em;
+	display: block;
+}
+
+/*Horizontal rule styling based on Chris Coyiers article*/
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
+
+/*footer styles*/
 footer {
-    clear: both;
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    margin-left: -2em;
-    border-top: 1px solid #e5e5e5;
-    background-color: #f5f5f5;
+	height: 15%;
+	margin: 1em 0;
+	text-align: center;
 }
 
-#thinkful {
-    margin-top: 25px;
+footer p {
+	font-size: 1.2em;
+	padding: 1em 0.2em;
+	line-height: 1.2em;
+	font-weight: 300;
+	color: #fff;
+	margin: 0 auto;
 }
 
-#instructions {
-    margin-bottom: 25px;
+footer span {
+	color: #e64c65;
+	font-size: 1.5em;
 }
 
-#instructions li { 
-    font-style: italic;
+footer a {
+	color: #11a8ab;
+	display: block;
+}
+/*---------------------------------------------------------------------------------
+   List App Section Styles
+---------------------------------------------------------------------------------*/
+
+/*Input Text Box*/
+.textBox {
+  padding: 0.8em; 
+  width: 100%; 
+  height: 10%;
+  border-style: none; 
+  font-size: 2em;
+  color: #282828;
 }
 
+input {
+	font-family: 'Open Sans', sans-serif;	
+	font-weight: 400;
+}
+
+input:focus {
+	outline: none;
+}
+
+/*List Styles*/
 #list {
-  margin-top: 30px;
-  width: 400px;
-}
-
-#list a {
-    float: right;
-    text-decoration: none;
-    color: red;
-    font-size: 11px;
-    font-family: sans-serif;
-    font-weight: bold;
-    padding: 3px;
-}
-
-#list input[type="checkbox"] {
-    margin: 0px 10px;
+	position: relative;
+	list-style-type: none;
+	width: 100%;
+	height: 90%;
 }
 
 #list li {
-    line-height: 2;
-    border: 1px tan dotted;
-    background-color: lightyellow;
+	position: relative;
+	background-color: #3498db;
+	width: 100%;
+	height: 60px;
 }
 
-#list li:hover {
-    cursor: pointer;
+#list li:nth-child(even) { 
+	background-color: #2980b9; 
 }
 
-.completed {
-    text-decoration: line-through;
-}   
+/*Span with Class item*/
+.item {
+	position: absolute;
+	left: 0;
+	width: 78%;
+	height: 60px;
+	font-size: 1.2em;
+	color: #fff;
+	padding-left: 0.8em;
+	line-height: 3em;
+}
+
+/*Delete icon using div*/
+.delete {
+	position: absolute;
+	right: 0;
+	background: url('logoANDoptions.png') no-repeat -80px -20px;
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+/*Checked off list item style*/
+.checked span.item{
+	text-decoration: line-through;
+	font-style: italic;
+}
+
+.checked {
+	background-color: #709984; 
+}
+
+/*---------------------------------------------------------------------------------
+   Media Queries for responsiveness
+---------------------------------------------------------------------------------*/
+
+@media only screen and (min-width: 481px) and (max-width: 800px){
+	h1 {
+		font-size: 2.2em;
+	}
+
+	.count {
+		font-size: 1.2em;
+	}
+
+	#do, #done, #total {
+		font-size: 3.5em;
+	}
+
+	footer {
+		margin: 0.2em 0;
+	}
+
+	footer p {
+		font-size: 1em;
+		padding: 0.5em;
+	}
+
+	footer span {
+		font-size: 1.2em;
+	}
+}
+
+@media only screen and (min-width: 300px) and (max-width: 480px){
+
+	header {
+		margin: 0.2em;
+	}
+
+	h1 {
+		font-size: 1.5em;
+	}
+
+	.count {
+		font-size: 1em;
+	}
+
+	#do, #done, #total {
+		font-size: 3em;
+	}
+
+	footer {
+		margin: 0.5em 0;
+	}
+
+	footer p {
+		font-size: 0.8em;
+		padding: 1em 0.5em;
+	}
+
+	footer span {
+		font-size: 1em;
+	}
+
+}
