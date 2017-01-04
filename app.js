@@ -1,55 +1,99 @@
 $(document).ready(function(){
-	/* add item on button click */
-	$("#AddButton").click(addItem);
 
-	/* add item when Enter key pressed when cursor is in textbox */
-	$("#newItemTextBox").keydown(function(event) {
-		var keycode = event.keyCode ? event.keyCode : event.which;
-		if(keycode == 13){
-			addItem();
-		}
+	var doCount = 3;
+	var doneCount = 1;
+	updateCount();
+
+	setFocus();
+	
+
+	$("form").submit(function(event){
+		
+		event.preventDefault();
+
+		var newItem = $.trim($('#newItem').val());
+		if (newItem == '') {
+			setFocus();
+		} else{
+			addItem(newItem);
+		};
+		
 	});
 
-	$(#list).on("click","a",function{
-		var listItem = $(this).closest("li");
-		var itemName = listItem.find("span").text();
-		var message = "Are you sure you want to remove '" + itemName + "' from the list?";
-		if(window.confirm(message)) {
-			listItem.remove();
-		}
-	});
 
-	/* strikethrough text if checkbox selected */
-	$("#list").on("change", "input:checkbox",function () {
-		var item = $(this).closest("li").find("span");
-		if($(this).is(":checked")) {
-			item.addClass("completed");
-		}
-		else
-			item.removeClass("completed"); 
-	});
+	/*--- Check off the items ---*/
+	$('#list').on('click', 'li.listitem', checkoff);
 
-	/* add sorting to list */
-	$("#list").sortable({   
-		placeholder: "ui-sortable-placeholder" 
-    });  
-});
+	/*--- Delete the item ---*/
+	$('#list').on('click', 'div.delete', deleteItem);
+	
 
-function addItem() {
-	var newItem = $("#newItemTextBox").val();
-	if(newItem.trim().length === 0) {
-		alert("You must enter an item to be added.");
-        return;
+	/*--- Delete Function ---*/
+	function deleteItem(){
+		console.log("Deleting...");
+		if($(this).parent().hasClass("checked")) {
+			doneCount--;
+			updateCount();
+			$(this).parent().slideUp('slow', function(){
+				$(this).remove();
+			});
+			console.debug($(this).parent());
+			return false;
+		} else {
+			doCount--;
+			updateCount();
+			$(this).parent().slideUp('slow', function(){
+				$(this).remove();
+			});
+			console.debug($(this).parent());
+			return false;
+		};
+    	
 	}
 
-	var listItem = createListItem(newItem);
-	$("#list").append(listItem);
-	$("#newItemTextBox").val("");
-}
+	/*--- Check off Function ---*/
+	function checkoff(){
+		console.log("Checking Off...");
+		if($(this).hasClass("checked")) {
+			$(this).slideUp('slow', function(){
+				$(this).slideDown('slow').prependTo('#list');
+			});
+			console.debug($(this));
+			doCount++;
+			doneCount--;
+			updateCount();
+		} else {
+			$(this).slideUp('slow', function(){
+				$(this).slideDown('slow').appendTo('#list');
+			});			
+			console.debug($(this));
+			doneCount++;
+			doCount--;
+			updateCount();
+		}
+		$(this).toggleClass("checked");
+		
+	}
 
-function createListItem(newItem) {
-	var listItem = "<li class='ui-state-default'><input type='checkbox'>"; 
-	listItem += "<span>" + newItem + "</span>";
-	listItem += "<a href='#'>remove</a></li>";
-	return listItem; 
-}
+	/*--- Add the new item to the list and increase the count ---*/
+	function addItem(item) {
+		doCount++;
+		updateCount();
+		$('<li class="listitem"><span class="item">' + item + '</span><div class="delete"></div></li>').hide().prependTo('#list').slideDown('slow');
+		console.log("You have now added " + item + "!");
+		setFocus();
+	}
+
+	/*--- Clear and Set focus to the inputbox ---*/
+	function setFocus() {
+		$('#newItem').val('');
+		document.getElementById("newItem").focus();
+	}
+
+	/*--- Update the DO, DONE & TOTAL counts ---*/
+	function updateCount() {
+		$('#do').text(doCount);
+		$('#done').text(doneCount);
+		$('#total').text(doCount + doneCount);
+	}
+});
