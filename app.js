@@ -1,7 +1,7 @@
+var shown= "total";
+
 $(document).ready(function(){
 
-	var doCount = 3;
-	var doneCount = 1;
 	updateCount();
 
 	setFocus();
@@ -26,61 +26,57 @@ $(document).ready(function(){
 
 	/*--- Delete the item ---*/
 	$('#list').on('click', 'div.delete', deleteItem);
+
+	/*--- Show items depending on status ---*/
+	$("#do").click(function(){showItems("DO");});
+	$("#done").click(function(){showItems("DONE");});	
+	$("#total").click(function(){showItems("ALL");});
+
+	/*--- Update counters ---*/
+	updateCount();
 	
+});
 
 	/*--- Delete Function ---*/
 	function deleteItem(){
 		console.log("Deleting...");
 		if($(this).parent().hasClass("checked")) {
-			doneCount--;
-			updateCount();
 			$(this).parent().slideUp('slow', function(){
 				$(this).remove();
 			});
 			console.debug($(this).parent());
 			return false;
 		} else {
-			doCount--;
-			updateCount();
 			$(this).parent().slideUp('slow', function(){
 				$(this).remove();
 			});
 			console.debug($(this).parent());
 			return false;
 		};
-    	
+		updateCount();
+    	$("#list li:visible").each(function( index ) {  
+			$(this).css("background-color", ( index % 2 ? "#3498db" : "#2980b9" ));
+		});
 	}
 
 	/*--- Check off Function ---*/
 	function checkoff(){
 		console.log("Checking Off...");
-		if($(this).hasClass("checked")) {
-			$(this).slideUp('slow', function(){
-				$(this).slideDown('slow').prependTo('#list');
-			});
-			console.debug($(this));
-			doCount++;
-			doneCount--;
-			updateCount();
-		} else {
-			$(this).slideUp('slow', function(){
-				$(this).slideDown('slow').appendTo('#list');
-			});			
-			console.debug($(this));
-			doneCount++;
-			doCount--;
-			updateCount();
-		}
+		console.debug($(this));	
 		$(this).toggleClass("checked");
-		
+		$(this).toggleClass("notChecked");
+		updateCount();
 	}
 
 	/*--- Add the new item to the list and increase the count ---*/
 	function addItem(item) {
-		doCount++;
 		updateCount();
-		$('<li class="listitem"><span class="item">' + item + '</span><div class="delete"></div></li>').hide().prependTo('#list').slideDown('slow');
+		showItems("ALL");
+		$('<li class="listitem notChecked"><span class="item">' + item + '</span><div class="delete"></div></li>').hide().prependTo('#list').slideDown('slow');
 		console.log("You have now added " + item + "!");
+		$("#list li:visible").each(function( index ) {  
+			$(this).css("background-color", ( index % 2 ? "#3498db" : "#2980b9" ));
+		});
 		setFocus();
 	}
 
@@ -92,8 +88,56 @@ $(document).ready(function(){
 
 	/*--- Update the DO, DONE & TOTAL counts ---*/
 	function updateCount() {
-		$('#do').text(doCount);
-		$('#done').text(doneCount);
-		$('#total').text(doCount + doneCount);
+		$('#do').text(countNotChecked());
+		$('#done').text(countChecked());
+		$('#total').text(countNotChecked() + countChecked());
 	}
-});
+	
+	/*--- Show DO, DONE & TOTAL items ---*/
+	function showItems(option){
+		switch(option){
+			case "DO":
+				show("DO");
+				notShow("DONE");
+			break;
+			case "DONE":
+				show("DONE");
+				notShow("DO");
+			break;
+			default:
+				show("DO");
+				show("DONE");
+		}
+		$("#list li:visible").each(function( index ) {  
+			$(this).css("background-color", ( index % 2 ? "#3498db" : "#2980b9" ));
+		});
+	}
+
+	function show(option){
+		if (option == "DO"){
+			$(" .notChecked" ).css("display","block");
+		}
+		else{
+			$(" .checked" ).css("display","block");
+		}
+	}
+
+	function notShow(option){
+		if (option == "DO"){
+			$(" .notChecked" ).css("display","none");
+		}
+		else{
+			$(" .checked" ).css("display","none");
+		}
+	}
+
+	/*--- Count checked and unchecked items  ---*/
+	function countChecked(){
+		var numItems = $('.checked').length;
+		return numItems;
+	} 
+
+	function countNotChecked(){
+		var numItems = $('.notChecked').length;
+		return numItems;
+	}
