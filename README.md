@@ -9,7 +9,7 @@ The ShoppingListApp is hosted by github see: https://nikhilmufc7.github.io/MySho
 3. Double click on index.html
 4. Start adding your list
 
-## how to use
+## How to use
 You can add your own list by typing in the input field 'Type here..'
 You can delete items by clicking on the close button
 You can check off a item by clicking on the item, you can undo this by again clicking on the item
