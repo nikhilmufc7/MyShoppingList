@@ -5,7 +5,9 @@ The ShoppingListApp is hosted by github see: https://nikhilmufc7.github.io/MySho
 
 ## How to make it work
 1. Click on clone and download and copy the link
-2. Open your terminal and type 'git clone https://github.com/nikhilmufc7/MyShoppingList.git'
+```
+$ git clone https://github.com/nikhilmufc7/MyShoppingList.git
+```
 3. Double click on index.html
 4. Start adding your list
 
